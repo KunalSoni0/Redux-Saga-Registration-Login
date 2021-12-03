@@ -10,7 +10,7 @@ export interface IState {
         lname:string
         comname:string
         email:string 
-        contact:number 
+        contact:string
         password:string 
         cpassword:string
 }
@@ -38,7 +38,7 @@ const Register = () => {
     const navigate = useNavigate();
 
 
-    const [credentials, setCredentials] = useState<IState>({fname:"",lname:"",comname:"",contact:0,email:"", password:"",cpassword:""})
+    const [credentials, setCredentials] = useState<IState>({fname:"",lname:"",comname:"",contact:"",email:"", password:"",cpassword:""})
     //const [usersData, setUser] = useState({})
     
 
@@ -50,8 +50,14 @@ const Register = () => {
     
     //const users = useSelector((state) => state.users);
 
-    const uData = useSelector((state:RootStore) => state.users.userData);
-    console.log("users:", uData)
+    const uData = useSelector((state:RootStore) => state?.users?.users);
+    console.log("users:", JSON.stringify(uData))
+
+    // useEffect(() => {
+    //     setCredentials({
+    //         ...uData
+    //     })
+    // }, uData)
     // useEffect(() => {
 
     // }, [userData])
@@ -63,9 +69,15 @@ const Register = () => {
         e.preventDefault(); 
         //console.log("e",e.target);
         
-        
-        const registration = {fname:credentials.fname,lname:credentials.lname,comname:credentials.comname,contact:credentials.contact,email:credentials.email, 
-            password:credentials.password,cpassword:credentials.cpassword};
+        const registration = {
+            fname:credentials.fname,
+            lname:credentials.lname,
+            comname:credentials.comname,
+            contact:credentials.contact,
+            email:credentials.email, 
+            password:credentials.password,
+            cpassword:credentials.cpassword
+        };
             //console.log("reggggg",registration);
             
 
@@ -74,8 +86,8 @@ const Register = () => {
         //localStorage.setItem('registration', JSON.stringify(registration));
         
         console.log(`Registration Successfull ${uData}`)
-        setCredentials({fname:"",lname:"",comname:"",contact:0,email:"", password:"",cpassword:""})
-      //  navigate('/login');
+        // setCredentials({fname:"",lname:"",comname:"",contact:0,email:"", password:"",cpassword:""})
+        // navigate('/login');
     }
 
     // const handleSubmit = () => dispatch(GetPokemon(pokemonName));
@@ -87,7 +99,7 @@ const Register = () => {
             <div className="row">
             {/* <img src="https://www.logodesign.net/images/nature-logo.png" style={imgStyle} alt="" /> */}
             <div className="col-lg-6" style={formStyle}>
-                {/* <h3>    {uData}</h3> */}
+                <h3> User Name : {uData && uData?.fname}</h3>
                 {/* {
                     users?.map((user:any)=>{
                         <h1>{user.fname}</h1>
@@ -98,17 +110,17 @@ const Register = () => {
                     <div className="row">
                         <div className="col-sm-6 col-md-6">
                             <label htmlFor="firstname" className="form-label">First Name</label>
-                            <input type="input" className="form-control" id="firstname" name="fname" value={credentials.fname} onChange={onChange} required/>
+                            <input type="input" className="form-control" id="firstname" name="fname" value={credentials.fname} onChange={(e)=>onChange(e)} required/>
                         </div>
                         <div className="col-sm-6 col-md-6">
                         <label htmlFor="lastname" className="form-label">Last Name</label>
-                        <input type="input" className="form-control" id="lastname" name="lname" value={credentials.lname} onChange={onChange}  required/>
+                        <input type="input" className="form-control" id="lastname" name="lname" value={credentials.lname} onChange={(e)=>onChange(e)}  required/>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-sm-6 col-md-6">
                             <label htmlFor="companyname" className="form-label">Company Name</label>
-                            <input type="input" className="form-control" id="companyname" name="comname" value={credentials.comname} onChange={onChange} required/>
+                            <input type="input" className="form-control" id="companyname" name="comname" value={credentials.comname} onChange={(e)=>onChange(e)} required/>
                         </div>
                         <div className="col-sm-6 col-md-6">
                         </div>
@@ -117,21 +129,21 @@ const Register = () => {
                     <div className="row">
                         <div className="col-sm-6 col-md-6">
                             <label htmlFor="email" className="form-label">Email address</label>
-                            <input type="email" className="form-control" id="email" name="email" value={credentials.email} onChange={onChange}  required/>
+                            <input type="email" className="form-control" id="email" name="email" value={credentials.email} onChange={(e)=>onChange(e)}  required/>
                         </div>
                         <div className="col-sm-6 col-md-6">
                             <label htmlFor="contactnumber" className="form-label">Contact Number</label>
-                            <input type="number" className="form-control" id="contactnumber" name="contact" value={credentials.contact} onChange={onChange} required/>
+                            <input type="number" className="form-control" id="contactnumber" name="contact" value={credentials.contact} onChange={(e)=>onChange(e)} required/>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-sm-6 col-md-6">
                             <label htmlFor="password" className="form-label">Password</label>
-                            <input type="password" className="form-control" id="password" name="password" value={credentials.password} onChange={onChange}  required/>
+                            <input type="password" className="form-control" id="password" name="password" value={credentials.password} onChange={(e)=>onChange(e)}  required/>
                         </div>
                         <div className="col-sm-6 col-md-6">
                             <label htmlFor="confirmpassword" className="form-label">Confirm Password</label>
-                            <input type="password" className="form-control" id="confirmpassword" name="cpassword" value={credentials.cpassword} onChange={onChange}  required/>
+                            <input type="password" className="form-control" id="confirmpassword" name="cpassword" value={credentials.cpassword} onChange={(e)=>onChange(e)}  required/>
                         </div>
                     </div>
                     <div className="mb-3 form-check">

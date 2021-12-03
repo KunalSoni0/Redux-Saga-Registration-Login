@@ -17,13 +17,9 @@ export const users = (state=initialState, action:any) => {
 
     const { type, users} = action;
     //console.log("action of users:", action)
-    console.log("hello:",{...state,
-        userData:{
-            ...state.userData, users:users
-        }})
+    console.log("Action called from reducer. ", action)
     switch (type) {
 		case actionIds.GET_USERS:
-            // console.log("action:", type, users)
             return{
                 // ...state.userData, ...action.users
                 ...state,

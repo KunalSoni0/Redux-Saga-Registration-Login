@@ -5,9 +5,10 @@ function* handleRegister( registration:any) {
 
     try {
         localStorage.setItem('registration', JSON.stringify(registration.payload));
-        var registrationData : any = localStorage.getItem('registration');
-        let data  = JSON.parse(registrationData);
-        yield put({ type: actionIds.GET_USERS, users:data});
+
+        //var registrationData : any = localStorage.getItem('registration');
+        //let data  = JSON.parse(registrationData);
+        yield put({ type: actionIds.GET_USERS, users:registration?.payload});
     } catch (err) {
         yield put({ type: actionIds.GET_USERS_FAILED, message: err });
       }
