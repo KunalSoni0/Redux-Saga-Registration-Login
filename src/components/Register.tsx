@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import  { handleRegistration } from "../actions/index"
-import {RootStore} from "../index";
+import {RootStore} from "../store";
 //import { users } from "../reducers/users"
 
 export interface IState {
@@ -16,8 +16,6 @@ export interface IState {
 }
 
 const Register = () => {
-    
-    
     const registerStyle={
         backgroundImage: `url("https://www.w3schools.com/css/img_mountains.jpg")` ,
         backgroundRepeat: "no-repeat",
@@ -41,7 +39,7 @@ const Register = () => {
 
 
     const [credentials, setCredentials] = useState<IState>({fname:"",lname:"",comname:"",contact:0,email:"", password:"",cpassword:""})
-    //const [userData, setUserData] = useState({})
+    //const [usersData, setUser] = useState({})
     
 
     const onChange =(e: React.ChangeEvent<HTMLInputElement>) =>{
@@ -52,30 +50,35 @@ const Register = () => {
     
     //const users = useSelector((state) => state.users);
 
-    const users = useSelector((state:any) => state.users.userData);
-    console.log("users:", users)
+    const uData = useSelector((state:RootStore) => state.users.userData);
+    console.log("users:", uData)
     // useEffect(() => {
-        
+
     // }, [userData])
-        
+
+
+
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
        // e:React.FormEvent<HTMLFormElement>
         e.preventDefault(); 
+        //console.log("e",e.target);
         
         
         const registration = {fname:credentials.fname,lname:credentials.lname,comname:credentials.comname,contact:credentials.contact,email:credentials.email, 
             password:credentials.password,cpassword:credentials.cpassword};
+            //console.log("reggggg",registration);
+            
 
         dispatch(handleRegistration(registration));
         // Put the object into storage
         //localStorage.setItem('registration', JSON.stringify(registration));
         
-        //console.log(`Registration Successfull ${users?.fname}`)
+        console.log(`Registration Successfull ${uData}`)
         setCredentials({fname:"",lname:"",comname:"",contact:0,email:"", password:"",cpassword:""})
       //  navigate('/login');
     }
 
-   // const handleSubmit = () => dispatch(GetPokemon(pokemonName));
+    // const handleSubmit = () => dispatch(GetPokemon(pokemonName));
     
 
     return (
@@ -84,7 +87,7 @@ const Register = () => {
             <div className="row">
             {/* <img src="https://www.logodesign.net/images/nature-logo.png" style={imgStyle} alt="" /> */}
             <div className="col-lg-6" style={formStyle}>
-                <h3>    {users?.fname}</h3>
+                {/* <h3>    {uData}</h3> */}
                 {/* {
                     users?.map((user:any)=>{
                         <h1>{user.fname}</h1>
@@ -139,7 +142,7 @@ const Register = () => {
                         <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
                         <label className="form-check-label" htmlFor="exampleCheck1">I agree to the Terms and Condtions</label>
                     </div>
-                    <button type="submit" className="btn btn-primary mt-3" >Submit</button>
+                    <button type="submit" className="btn btn-primary mt-3">Submit</button>
                     {/* onClick={(e)=>handleSubmit} */}
                 </form>
                 <p style={{display:"inline-flex"}}>

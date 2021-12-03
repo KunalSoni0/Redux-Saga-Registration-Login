@@ -1,7 +1,14 @@
 import { JsxElement } from "typescript";
 import { actionIds, RegisterType} from "../types/actionType";
 const initialState = {
-      userData:{},
+      userData:{}
+        //   fname:"k",
+        //   lname:"s",
+        //   comname:"cre",
+        //   email:"k@gmail.com",
+        //   password:"kun",
+        //   cpassword:"kun"
+      ,
       loading:false,
       error:null
   };

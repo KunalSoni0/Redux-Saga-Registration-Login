@@ -3,24 +3,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import UserSaga from "./sagas/registerSaga"
-import createSagaMiddleware from "redux-saga";
-import { createStore, applyMiddleware, compose } from "redux";
-import reducers from "./reducers";
-import { composeWithDevTools } from "redux-devtools-extension";
+// import UserSaga from "./sagas/registerSaga"
+// import createSagaMiddleware from "redux-saga";
+// import { createStore, applyMiddleware, compose } from "redux";
+// import reducers from "./reducers";
+// import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
+import  store  from "./store"
+// const sagaMiddleware = createSagaMiddleware();
+// //const middleware = [sagaMiddleware];
 
-const sagaMiddleware = createSagaMiddleware();
-//const middleware = [sagaMiddleware];
+// const store = createStore(
+// 	reducers,
+// 	composeWithDevTools(applyMiddleware(sagaMiddleware))
+// );
 
-const store = createStore(
-	reducers,
-	composeWithDevTools(applyMiddleware(sagaMiddleware))
-);
+//  sagaMiddleware.run(UserSaga);
 
- sagaMiddleware.run(UserSaga);
-
-export type RootStore = ReturnType<typeof reducers>
+// export type RootStore = ReturnType<typeof reducers>
 
 ReactDOM.render(
   <React.StrictMode>

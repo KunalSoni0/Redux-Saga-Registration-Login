@@ -6,6 +6,7 @@ import List from './components/List';
 import Register from './components/Register';
 import Login from './components/Login';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import RegisterAnt from './components/RegisterAnt';
 
 interface IState {
   people:{
@@ -43,6 +44,7 @@ console.log(people)
             </Route>
             <Route path="/registration" element={<Register/>}></Route>
             <Route path="/" element={<Header title="TypeScript" color="green"/>}></Route>
+            <Route path="/registerant" element={<RegisterAnt/>}></Route>
           </Routes>
     </Router>
     </>
